@@ -1,151 +1,129 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>社交媒体成瘾测试 - BSMAS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>社交媒体成瘾调查问卷 BSMAS</title>
   <style>
     body {
-      font-family: 'Helvetica Neue', sans-serif;
-      background: #f2fdfd;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: #fff;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-family: Arial, sans-serif;
+      background-color: #e8f8f5;
+      margin: 20px;
+      padding-bottom: 100px;
     }
     h1 {
-      color: #008080;
-      font-size: 24px;
+      color: #00796B;
     }
-    p {
-      margin: 10px 0;
-      font-size: 16px;
+    label, p {
+      display: block;
+      margin: 10px 0 5px;
     }
     .question {
-      margin: 20px 0;
-    }
-    label {
-      display: block;
-      margin: 4px 0;
-    }
-    button {
-      background: #00bfa5;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
+      margin-bottom: 20px;
     }
     .result {
-      margin-top: 20px;
       font-weight: bold;
-      font-size: 18px;
-      color: #00695c;
+      color: #d84315;
+      margin-top: 20px;
+    }
+    button {
+      background-color: #00796B;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d40;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>社交媒体成瘾调查问卷 BSMAS</h1>
-    <p>亲爱的同学你好！<br>
-      这是一项针对大学生群体的社交媒体成瘾性和发展抑郁症倾向之间相关性的研究，希望通过问卷形式来采集一些相关数据✨<br>
-      本项调查以完全匿名的形式展开，收集的结果仅为学术性研究使用🌹，这可能需要花费大家一些时间，非常感谢大家的抽空参与！🥺🙏<br>
-      本项调查没有任何的已知风险，请按照最真实的情况填写即可🤲🏻谢谢！
-    </p>
-    <p>Hello!<br>
-      This is a survey aiming to determine the potential connection between social media addiction and depression among college-age students.✨<br>
-      It is completely anonymous, and the data is used only for academic research.🥺🙏<br>
-      There is no known potential risk. Please answer truthfully.🌹
-    </p>
+  <h1>社交媒体成瘾调查问卷 BSMAS</h1>
+  <p>亲爱的同学你好！</p>
+  <p>这是一项针对大学生群体的社交媒体成瘾性和发展抑郁症倾向之间相关性的研究，希望通过问卷形式来采集一些相关数据✨</p>
+  <p>本项调查以完全匿名的形式展开，收集的结果仅为学术性研究使用🌹，这可能需要花费大家一些时间，非常感谢大家的抽空参与！🥺🙏</p>
+  <p>本项调查没有任何的已知风险，请按照最真实的情况填写即可🤲🏻谢谢！</p>
 
-    <form id="surveyForm">
-      <div id="questions"></div>
-      <button type="submit">提交 Submit</button>
-    </form>
+  <p>Hello!</p>
+  <p>This is a survey aiming to determine the potential connection between social media addiction and depression among college-age students.✨</p>
+  <p>It is completely anonymous, and the data is used only for academic research.🥺🙏</p>
+  <p>There is no known potential risk. Please answer truthfully.🌹</p>
 
-    <div class="result" id="result"></div>
-  </div>
+  <form id="bsmForm">
+    <div id="questions"></div>
+    <button type="submit">提交 Submit</button>
+  </form>
+
+  <div class="result" id="result"></div>
 
   <script>
     const questions = [
-      {
-        zh: "1. 你是否经常想着之前在社交媒体上的使用经历或期待下一次使用？",
-        en: "1. Do you often think about social media or plan your next use?"
-      },
-      {
-        zh: "2. 你是否感到有强烈的冲动或欲望想使用社交媒体？",
-        en: "2. Do you feel an urge or strong desire to use social media?"
-      },
-      {
-        zh: "3. 你是否使用社交媒体来摆脱个人问题或不良情绪？",
-        en: "3. Do you use social media to forget about personal problems or relieve negative moods?"
-      },
-      {
-        zh: "4. 你是否觉得你使用社交媒体的时间比你原计划的要长？",
-        en: "4. Do you often spend more time on social media than originally intended?"
-      },
-      {
-        zh: "5. 你是否尝试过减少使用社交媒体但失败了？",
-        en: "5. Have you tried to cut down on social media without success?"
-      },
-      {
-        zh: "6. 当你不能使用社交媒体时，你是否会感到不安或烦躁？",
-        en: "6. Do you become restless or troubled if you can’t use social media?"
-      }
+      "1. 你是否经常想在之前在社交媒体上的使用经历或期待下一次使用？ / Do you often think about social media or plan your next use?",
+      "2. 你是否感到有强烈的冲动或欲望想使用社交媒体？ / Do you feel an urge or strong desire to use social media?",
+      "3. 你是否使用社交媒体来逃避现实或减轻负面情绪（如罪恶感、焦虑或抑郁）？ / Do you use social media to forget about personal problems?",
+      "4. 你是否尝试减少使用社交媒体却未能成功？ / Have you tried to cut down on your social media use without success?",
+      "5. 你是否因为使用社交媒体而忽略了重要的工作、学习或社交活动？ / Have you neglected other responsibilities because of social media?",
+      "6. 当你无法使用社交媒体时，你是否感到烦躁或焦虑？ / Do you become restless or troubled when you cannot use social media?"
     ];
 
-    const questionsDiv = document.getElementById("questions");
+    const choices = [
+      { label: "极少 Very rarely (1 point)", value: 1 },
+      { label: "比较少 Rarely (2 points)", value: 2 },
+      { label: "有时 Sometimes (3 points)", value: 3 },
+      { label: "经常 Often (4 points)", value: 4 },
+      { label: "总是 Very often (5 points)", value: 5 }
+    ];
+
+    const form = document.getElementById('bsmForm');
+    const questionContainer = document.getElementById('questions');
 
     questions.forEach((q, index) => {
-      const qDiv = document.createElement("div");
-      qDiv.className = "question";
-      qDiv.innerHTML = `
-        <p><strong>${q.zh}</strong><br>${q.en}</p>
-        ${[1,2,3,4,5].map(n =>
-          `<label><input type="radio" name="q${index}" value="${n}" required> ${n}</label>`
-        ).join("")}
-      `;
-      questionsDiv.appendChild(qDiv);
+      const div = document.createElement('div');
+      div.classList.add('question');
+      div.innerHTML = `<p>${q}</p>`;
+      choices.forEach(choice => {
+        div.innerHTML += `
+          <label>
+            <input type="radio" name="q${index}" value="${choice.value}" required>
+            ${choice.label}
+          </label>
+        `;
+      });
+      questionContainer.appendChild(div);
     });
 
-    const resultDiv = document.getElementById("result");
-    const form = document.getElementById("surveyForm");
-
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       let total = 0;
+      const answers = [];
+
       for (let i = 0; i < questions.length; i++) {
-        const val = parseInt(document.querySelector(`input[name=q${i}]:checked`).value);
+        const val = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
         total += val;
+        answers.push(val);
       }
 
       let interpretation = "";
-      if (total <= 18) {
-        interpretation = "低风险（未成瘾） / Low risk (not addicted)";
-      } else if (total <= 24) {
-        interpretation = "中等风险（可能成瘾） / Moderate risk (at risk)";
-      } else {
-        interpretation = "高风险（可能已成瘾） / High risk (likely addicted)";
-      }
+      if (total <= 18) interpretation = "社交媒体成瘾风险较低 / Low risk of addiction";
+      else if (total <= 24) interpretation = "中等风险 / Moderate risk of addiction";
+      else interpretation = "高风险，建议关注心理健康 / High risk, consider seeking support";
 
-      resultDiv.innerHTML = `你的总得分为 ${total}。<br>Your total score is ${total}.<br><br>${interpretation}`;
+      document.getElementById('result').innerText = `你的总分是 Your total score is: ${total}\n${interpretation}`;
 
-      // send to Google Sheet
+      // 向 Google Sheets 提交数据
       const response = await fetch("https://script.google.com/macros/s/AKfycbzoQoO451DhI6jWgwXkgTbv_-HH5uvLtfJIHt1JuX5HJq2cZzuVuS8d-8aFzeFOXua2/exec", {
         method: "POST",
         mode: "no-cors",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ score: total, interpretation })
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          answers: answers,
+          total: total
+        })
       });
     });
   </script>
