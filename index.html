@@ -139,7 +139,7 @@
       resultDiv.innerHTML = `你的总得分为 ${total}。<br>Your total score is ${total}.<br><br>${interpretation}`;
 
       // send to Google Sheet
-      const response = await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzoQoO451DhI6jWgwXkgTbv_-HH5uvLtfJIHt1JuX5HJq2cZzuVuS8d-8aFzeFOXua2/exec", {
         method: "POST",
         mode: "no-cors",
         headers: {
