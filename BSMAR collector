@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社交媒体成瘾测试 - BSMAS</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background: #f2fdfd;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #008080;
+      font-size: 24px;
+    }
+    p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .question {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .option {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      padding: 8px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .option:hover {
+      background: #f0f7ff;
+      border-color: #4a90e2;
+    }
+    .option-text {
+      margin-left: 10px;
+    }
+    .option-text-en {
+      font-size: 0.85em;
+      color: #666;
+      margin-left: 5px;
+    }
+    button {
+      background: #00bfa5;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #009688;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>社交媒体成瘾调查问卷 BSMAS</h1>
+    <p>亲爱的同学你好！<br>
+      这是一项针对大学生群体的社交媒体成瘾性和发展抑郁症倾向之间相关性的研究，希望通过问卷形式来采集一些相关数据✨<br>
+      本项调查以完全匿名的形式展开，收集的结果仅为学术性研究使用🌹，这可能需要花费大家一些时间，非常感谢大家的抽空参与！🥺🙏<br>
+      本项调查没有任何的已知风险，请按照最真实的情况填写即可🤲🏻谢谢！
+    </p>
+    <p>Hello!<br>
+      This is a survey aiming to determine the potential connection between social media addiction and depression among college-age students.✨<br>
+      It is completely anonymous, and the data is used only for academic research.🥺🙏<br>
+      There is no known potential risk. Please answer truthfully.🌹
+    </p>
+
+    <form id="surveyForm">
+      <div id="questions"></div>
+      <button type="submit">提交 Submit</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        zh: "1. 你是否经常想着之前在社交媒体上的使用经历或期待下一次使用？",
+        en: "1. Do you often think about social media or plan your next use?"
+      },
+      {
+        zh: "2. 你是否感到有强烈的冲动或欲望想使用社交媒体？",
+        en: "2. Do you feel an urge or strong desire to use social media?"
+      },
+      {
+        zh: "3. 你是否使用社交媒体来摆脱个人问题或不良情绪？",
+        en: "3. Do you use social media to forget about personal problems or relieve negative moods?"
+      },
+      {
+        zh: "4. 你是否觉得你使用社交媒体的时间比你原计划的要长？",
+        en: "4. Do you often spend more time on social media than originally intended?"
+      },
+      {
+        zh: "5. 你是否尝试过减少使用社交媒体但失败了？",
+        en: "5. Have you tried to cut down on social media without success?"
+      },
+      {
+        zh: "6. 当你不能使用社交媒体时，你是否会感到不安或烦躁？",
+        en: "6. Do you become restless or troubled if you can't use social media?"
+      }
+    ];
+
+    const options = [
+      { zh: "极少 (1分)", en: "very rarely (1 point)", value: 1 },
+      { zh: "比较少 (2分)", en: "rarely (2 points)", value: 2 },
+      { zh: "有时 (3分)", en: "sometimes (3 points)", value: 3 },
+      { zh: "经常 (4分)", en: "often (4 points)", value: 4 },
+      { zh: "总是 (5分)", en: "very often (5 points)", value: 5 }
+    ];
+
+    const questionsDiv = document.getElementById("questions");
+
+    questions.forEach((q, index) => {
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+      qDiv.innerHTML = `
+        <p><strong>${q.zh}</strong><br><em>${q.en}</em></p>
+        <div class="options" id="options-${index}"></div>
+      `;
+      questionsDiv.appendChild(qDiv);
+      
+      const optionsDiv = document.getElementById(`options-${index}`);
+      options.forEach(opt => {
+        const optDiv = document.createElement("label");
+        optDiv.className = "option";
+        optDiv.innerHTML = `
+          <input type="radio" name="q${index}" value="${opt.value}" required>
+          <div class="option-text">
+            ${opt.zh}
+            <span class="option-text-en">${opt.en}</span>
+          </div>
+        `;
+        optionsDiv.appendChild(optDiv);
+      });
+    });
+
+    const resultDiv = document.getElementById("result");
+    const form = document.getElementById("surveyForm");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let total = 0;
+      for (let i = 0; i < questions.length; i++) {
+        const val = parseInt(document.querySelector(`input[name=q${i}]:checked`).value);
+        total += val;
+      }
+
+      let interpretation = "";
+      let interpretationEn = "";
+      if (total <= 18) {
+        interpretation = "低风险（未成瘾）";
+        interpretationEn = "Low risk (not addicted)";
+      } else if (total <= 24) {
+        interpretation = "中等风险（可能成瘾）";
+        interpretationEn = "Moderate risk (at risk)";
+      } else {
+        interpretation = "高风险（可能已成瘾）";
+        interpretationEn = "High risk (likely addicted)";
+      }
+
+      resultDiv.innerHTML = `
+        <h3>你的测评结果 | Your Test Result</h3>
+        <p>你的总得分为: <strong>${total}</strong> 分</p>
+        <p>Your total score is: <strong>${total}</strong> points</p>
+        <p>结果分类: <strong>${interpretation}</strong></p>
+        <p>Interpretation: <strong>${interpretationEn}</strong></p>
+      `;
+
+      // 发送到Google Sheet的代码保持不变
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbzoQoO451DhI6jWgwXkgTbv_-HH5uvLtfJIHt1JuX5HJq2cZzuVuS8d-8aFzeFOXua2/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ 
+            score: total, 
+            interpretation: interpretation,
+            timestamp: new Date().toISOString()
+          })
+        });
+        console.log("Data submitted successfully");
+      } catch (error) {
+        console.error("Error submitting data:", error);
+      }
+    });
+  </script>
+</body>
+</html>
